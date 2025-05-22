@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="img/PNG/favicon.png">
+  <title>Registro | Qube</title>
+  <link rel="stylesheet" href="styles/regs.css">
+</head>
+<body>
+  <div class="register-container">
+    <div class="register-card">
+      <div class="logo"></div>
+      <h2>Bienvenido a <span><h1>QUBE</h1></span></h2>
+
+      
+      <form action="/api/register" method="POST">
+        <input type="email" name="correo" placeholder="Correo electrónico" required>
+        <input type="password" name="contrasena" placeholder="Contraseña" required>
+        <a href="login.html" class="forgot">¿Ya tienes una cuenta?</a>
+        <button type="submit">Registrarse</button>
+      </form>
+ <script>
+(function injectToastStyles() {
+  if (document.getElementById('toast-styles')) return;
+  const style = document.createElement('style');
+  style.id = 'toast-styles';
+  style.textContent = `
+    .apple-toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      max-width: 300px;
+      background: rgba(50,50,50,0.9);
+      color: #fff;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "San Francisco", sans-serif;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: slideIn 0.3s forwards, fadeOut 0.3s 4.7s forwards;
+    }
+    @keyframes slideIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
+// Función principal de notificación
+function notify(title, body, icon = '/img/PNG/error-icon.png') {
+  const options = { body, icon };
+  // si la API está y ya dio permiso
+  if ('Notification' in window && Notification.permission === 'granted') {
+    try {
+      return new Notification(title, options);
+    } catch (e) {
+      console.warn('Notification fallo, usando toast', e);
+      return showToast(body);
+    }
+  }
+  // si la API existe pero no se ha preguntado
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        new Notification(title, options);
+      } else {
+        showToast(body);
+      }
+    }).catch(() => showToast(body));
+    return;
+  }
+  // en cualquier otro caso (sin API o permiso denegado)
+  showToast(body);
+}
+
+// Muestra un toast simple estilo Apple
+function showToast(msg) {
+  const toast = document.createElement('div');
+  toast.className = 'apple-toast';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 5000);
+}
+
+// Detecta los parámetros de la URL y dispara la notificación
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get('error') === 'auth') {
+    // Login fallido
+    notify('Error de autenticación', 'Correo o contraseña incorrectos.');
+    return;
+  }
+
+  if (params.get('error') === 'register') {
+    // Registro fallido
+    notify('Registro fallido', 'El usuario ya está registrado.');
+    return;
+  }
+
+  if (params.get('success') === 'register') {
+    // Registro exitoso
+    notify('Registro exitoso', 'Ya puedes iniciar sesión.', '/img/PNG/success-icon.png');
+    return;
+  }
+});
+  </script>
+      <div class="register-alt">
+        <button class="google"><i class="fa-brands fa-google"></i> Registrarse con Google</button>
+        <button class="apple"><i class="fa-brands fa-apple"></i> Registrarse con Apple</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

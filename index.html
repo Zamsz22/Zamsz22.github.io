@@ -1,143 +1,201 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUBE</title>
-    <link rel="icon" type="image/png" href="img/PNG/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/three@0.153.0/build/three.min.js"></script>
-    <!-- Los cargadores de modelos no son necesarios si solo usamos la esfera -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QUBE</title>
+  <link rel="stylesheet" href="view/styles/index.css"> <!-- Asegúrate que la ruta sea correcta -->
+  <link rel="icon" type="image/png" href="../view/img/PNG/favicon.png">
 </head>
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <!-- Header -->
-      <header class="header">
-        <div class="logo-wrapper">
-          <div class="logo-bg">
-            <div class="logo"> <img src="img/PNG/LogoFullColor.png" alt="" style="display:none;"></div> 
-          </div>
-          <h1>Generador de Patrones</h1>
-        </div>
-        <button class="theme-toggle" aria-label="Cambiar tema">
-          <i class="fa-solid fa-moon"></i>
-        </button>
-      </header>
+  <header>
+    <div class="nav-left">
+      <a href="../index.html" class="logo"><img src="view/img/SVG/LogoFullColor.svg" alt="logo"/></a> 
+      <a href="#texture-gallery">Explorar</a>
+      <a href="view/wizard.html">Generar patrones</a> 
+    </div>
+<div class="nav-right">
+  <!--LOGIN-->
+</div>
 
-      <form action="#" class="prompt-form">
-        <!-- Prompt -->
-        <div class="prompt-container">
-          <textarea class="prompt-input" placeholder="Escribe una descripción detallada del patrón..." required autofocus></textarea>
-          <button type="button" class="prompt-btn" aria-label="Generar prompt aleatorio">
-            <i class="fa-solid fa-dice"></i>
-          </button>
-        </div>
+  </header>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Generador de <br> texturas con <span class="grado"> IA </span></h1>
+      <p>Transforma tus ideas en texturas únicas con la ayuda de la inteligencia artificial.<br>Diseña texturas y baldosas personalizadas sin registrarte.</p>
+      <a href="view/wizard.html" style="text-decoration: none;">
+      <button class="btn" >Empieza ahora  </button>
+      </a>
+      <a class="register">Registrarse</a>
+    </div>
+    <div class="hero-image">
+     
+      
+    </div>
+  </section>
 
-        <!-- Actions -->
-        <div class="prompt-actions">
-          <div class="select-wrapper">
-            <select class="custom-select" id="model-select" required aria-label="Seleccionar modelo de IA">
-              <option value="" selected disabled>Seleccionar modelo</option>
-              <option value="black-forest-labs/FLUX.1-dev">FLUX.1-dev</option>
-              <option value="black-forest-labs/FLUX.1-schnell">FLUX.1-schnell</option>
-            </select>
-          </div>
-          <div class="select-wrapper">
-            <select class="custom-select" id="count-select" required aria-label="Seleccionar número de imágenes alternativas">
-              <option value="" selected disabled>Imágenes Alternativas</option>
-              <option value="1">1 Imagen</option>
-              <option value="2">2 Imágenes</option>
-              <option value="3">3 Imágenes</option>
-              <option value="4">4 Imágenes</option>
-            </select>
-          </div>
-        </div>
+  <section class="filters">
+    <select id="filter-sort">
+      <option value="recent">Recientes </option>
+      <option value="popular">Populares</option>
+    </select>
+    <select id="filter-category">
+      <option value="all">Todas</option>
+      <option value="geometric">Geométrico</option>
+      <option value="espacio">Orgánico</option>
+      <option value="abstracto">Abstracto</option>
+      <option value="tecnologico">Realista</option>
+    </select>
+  </section>
 
-        <!-- Shape Check -->
-        <div class="shape-container">
-          <label class="main-label">Apariencia del Patrón</label> <!-- Etiqueta general -->
-          <div class="shape-options">
-            <input type="radio" id="shape1" name="shape" value="geometric" checked>
-            <label for="shape1">Geométrico</label>
-            <input type="radio" id="shape2" name="shape" value="organic">
-            <label for="shape2">Orgánico</label>
-          </div>
-          <!-- Sliders -->
-          <div class="slider-container">
-            <div class="slider-wrapper">
-              <label for="scale">Escala de Textura</label>
-              <input type="range" id="scale" min="1" max="50" step="1" value="10">
-              <span class="slider-value" id="scale-val">10</span>
-            </div>
-            <div class="slider-wrapper">
-              <label for="density">Complejidad / Densidad</label>
-              <input type="range" id="density" min="1" max="100" step="1" value="20">
-              <span class="slider-value" id="density-val">20</span>
-            </div>
-            <div class="slider-wrapper">
-              <label for="rotation">Rotación de Textura</label>
-              <input type="range" id="rotation" min="0" max="360" step="1" value="0">
-              <span class="slider-value" id="rotation-val">0</span>
-            </div>
-          </div>
+  <section class="gallery" id="texture-gallery">
+    <div class="tile-card">
+      <img src="view/img/PNG/11.png" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Restaurante baldosa orgánica</div>
+        <div class="tile-author">Federico Peluche</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
         </div>
-
-        <!-- Acciones Finales -->
-        <div class="prompt-actions-final">
-          <button type="submit" class="form-action-btn">
-            <i class="fa-solid fa-wand-sparkles"></i>
-            Generar
-          </button>
-          <button type="button" class="export-btn form-action-btn">
-            <i class="fa-solid fa-download"></i>
-            Exportar
-          </button>
-        </div>
-      </form>
-    </aside>
-
-    <div class="viewer">
-      <canvas id="three-canvas"></canvas>
-      <div class="viewer-overlay-text">
-        <p>Usa la rueda del ratón para zoom.</p>
-        <p>Clic y arrastra para rotar.</p>
       </div>
     </div>
 
-    <div class="prompt-option-container">
-      <h2 class="prompt-option-title">Da click al patrón que quieres aplicar a la esfera</h2>
-      <div class="prompt-option">
-          <!-- Las img-card se generan aquí por JS -->
+    <div class="tile-card">
+      <img src="view/img/PNG/02.png" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Techo Barroco</div>
+        <div class="tile-author">Gustavo Cerati</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
+        </div>
       </div>
     </div>
 
-  </div> <!-- Cierre de .container -->
-
-  <button class="help-button" aria-label="Ayuda">?</button>
-
-  <!-- Export Modal -->
-  <div id="export-modal" class="modal-overlay">
-    <div class="modal-content">
-      <button class="modal-close-btn" id="modal-close-btn" aria-label="Cerrar modal">×</button>
-      <h2>Exportar Patrón</h2>
-      <p>Selecciona el formato deseado para la imagen activa:</p>
-      <div class="export-options">
-        <button class="export-format-btn" data-format="png">PNG</button>
-        <button class="export-format-btn" data-format="jpg">JPG</button>
-        <button class="export-format-btn" data-format="svg" disabled title="Conversión a SVG próximamente">SVG</button>
-        <button class="export-format-btn" data-format="tiff" disabled title="Conversión a TIFF próximamente">TIFF</button>
-        <button class="export-format-btn" data-format="pdf" disabled title="Exportar a PDF próximamente">PDF</button>
+    <div class="tile-card">
+      <img src="view/img/PNG/05.png" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Azulejos baño</div>
+        <div class="tile-author">Bartolomeo J. Simpson</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
+        </div>
       </div>
-      <hr>
-      <button class="share-btn" id="share-pattern-btn">
-        <i class="fa-solid fa-share-nodes"></i> Compartir Patrón
-      </button>
-      <p id="export-status" class="export-status-message" style="display:none;"></p>
     </div>
-  </div>
 
-<script type="module" src="script.js"></script>
+    <div class="tile-card">
+      <img src="view/img/WEBP/lavita.webp" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Suelo volcanico</div>
+        <div class="tile-author">Juan Alberto Garcia</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile-card">
+      <img src="view/img/PNG/01.png" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Patron teseracto</div>
+        <div class="tile-author">El Fedewolf</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile-card">
+      <img src="view/img/PNG/03.png" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Suelo Tradicional</div>
+        <div class="tile-author">Juan Perez</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile-card">
+      <img src="view/img/WEBP/grass.webp" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Pasto Viejo</div>
+        <div class="tile-author">Samuel de luque</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile-card">
+      <img src="view/img/PNG/10.png" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Organico moderno</div>
+        <div class="tile-author">Yonaikerson Gomez</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile-card">
+      <img src="view/img/PNG/00.png" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Lineas blancas entrelazadas</div>
+        <div class="tile-author">Armando Casas</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
+        </div>
+      </div>
+    </div>  
+    
+    <div class="tile-card">
+      <img src="view/img/PNG/04.png" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Panel Acustico</div>
+        <div class="tile-author">Valentina Pirueta</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
+        </div>
+      </div>
+    </div> 
+
+    <div class="tile-card">
+      <img src="view/img/PNG/07.png" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Verdes y Blancos</div>
+        <div class="tile-author">Tilin afgano</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
+        </div>
+      </div>
+    </div>  
+    
+    <div class="tile-card">
+      <img src="view/img/PNG/09.png" alt="Textura baldosa" class="tile-image">
+      <div class="tile-info">
+        <div class="tile-title">Diagonales</div>
+        <div class="tile-author">El Chavito</div>
+        <div class="tile-actions">
+          <span class="icon">🤍</span>
+          <span class="icon">👍</span>
+        </div>
+      </div>
+    </div> 
+
+  </section>
+
+ 
+  
 </body>
 </html>

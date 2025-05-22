@@ -1,0 +1,249 @@
+
+:root {
+    --color-primary: #053ea9;
+    --color-primary-dark: #001827;
+    --color-accent: #00A984; /* Ajustado para consistencia con gradiente */
+    --color-card: #FFFFFF;
+    --color-input: #eaf4fa;
+    --color-text: #273d4b;
+    --color-placeholder: #5a6f87;
+    --color-border: #D4D4ED;
+    --color-gradient: linear-gradient(45deg, #053ea9, #00A984);
+    --color-opacity: rgba(253, 253, 253, 0.596);
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-strong: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Montserrat", sans-serif; /* O la fuente que uses */
+    background-color: #f0f4f8; /* O el color de fondo que prefieras */
+    overflow: hidden; /* Evitar scroll si el contenido se desborda */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-wizard-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.form-wizard {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px; /* Ancho máximo del wizard */
+    height: auto;
+    max-height: 90vh; /* Altura máxima para que quepa en pantalla */
+    overflow-y: auto; /* Scroll si el contenido del slide es muy largo */
+    position: relative; /* Para la navegación absoluta si es necesario */
+    display: flex; /* Para que los slides se pongan uno al lado del otro */
+    overflow-x: hidden; /* Ocultar el desbordamiento horizontal de los slides */
+}
+
+.slide {
+    min-width: 100%; /* Cada slide ocupa el ancho completo del contenedor .form-wizard */
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateX(100%); /* Empieza fuera de la vista a la derecha */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    position: absolute; /* Para superponerlos y controlar visibilidad */
+    left:0;
+    top:0;
+    padding: inherit; /* Heredar padding del wizard si es necesario */
+    visibility: hidden;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    position: relative; /* O 'static' si no necesitas superposición exacta */
+    visibility: visible;
+}
+
+.slide.exit-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+.slide.enter-right {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+
+.slide h2 {
+    color: #053ea9; /* Tu color primario */
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.slide p {
+    color: #5a6f87; /* Tu color de placeholder o texto secundario */
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.slide textarea {
+    width: 100%;
+    min-height: 80px; /* Altura mínima */
+    padding: 12px 15px;
+    border: 1px solid #D4D4ED; /* Tu color de borde */
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    resize: vertical;
+    margin-bottom: 30px;
+}
+
+.slide textarea:focus {
+    outline: none;
+    border-color: #00A984; /* Tu color de acento */
+    box-shadow: 0 0 0 3px color-mix(in srgb, #00A984 20%, transparent);
+}
+
+.slide-navigation {
+    display: flex;
+    justify-content: space-between; /* Para poner anterior a la izq y siguiente/finalizar a la der */
+    align-items: center;
+    margin-top: 20px;
+}
+
+.slide-navigation button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    background: #053ea9; /* Tu gradiente o color primario */
+    color: white;
+}
+.slide-navigation button.prev-btn {
+   background-color: #5672b9; /* --color-input dark */
+    color: #ffffff; /* --color-accent dark */
+    border-color: #334155; /* --color-border dark */
+}
+.slide-navigation button.prev-btn:hover {
+    background-color: #dce9f2;
+}
+
+.slide-navigation button:hover {
+    opacity: 0.9;
+}
+.slide-navigation button:active {
+    transform: scale(0.98);
+}
+
+#summary-prompt {
+    background-color: #f9f9f9;
+    border-color: #ccc;
+}
+
+/* Estilos para el modo oscuro si los tienes definidos en el principal */
+body.dark-theme .form-wizard {
+    background-color: #1E293B; /* --color-card dark */
+}
+body.dark-theme .slide h2 {
+    color: #6ae794; /* --color-primary dark */
+}
+body.dark-theme .slide p {
+    color: #94A3B8; /* --color-placeholder dark */
+}
+body.dark-theme .slide textarea {
+    background-color: #141B2D; /* --color-input dark */
+    color: #E2E8F0; /* --color-text dark */
+    border-color: #334155; /* --color-border dark */
+}
+body.dark-theme .slide textarea:focus {
+    border-color: #6ae794; /* --color-accent dark */
+    box-shadow: 0 0 0 3px color-mix(in srgb, #6ae794 20%, transparent);
+}
+body.dark-theme .slide-navigation button {
+    background: #6ae794; /* --color-accent dark */
+    color: #111827; /* --color-primary-dark (fondo) para contraste */
+}
+body.dark-theme .slide-navigation button.prev-btn {
+    background-color: #141B2D; /* --color-input dark */
+    color: #6ae794; /* --color-accent dark */
+    border-color: #334155; /* --color-border dark */
+}
+body.dark-theme .slide-navigation button.prev-btn:hover {
+    background-color: #0f172a; /* Un poco más oscuro que input dark */
+}
+body.dark-theme #summary-prompt {
+    background-color: #141B2D;
+    border-color: #334155;
+    color: #E2E8F0;
+}
+
+.form-wizard {
+    /* ... (otros estilos de .form-wizard) ... */
+    position: relative; /* Necesario para posicionar los slides absolutamente dentro */
+    display: block; /* Cambiado de flex a block para que los slides se superpongan */
+    overflow: hidden; /* Ocultar los slides que están fuera de la vista */
+    /* width y max-width ya definidos */
+    /* height y max-height ya definidos */
+}
+
+.slide {
+    width: 100%; /* Cada slide ocupa el ancho completo */
+    box-sizing: border-box;
+    padding: 30px 40px; /* Mismo padding que el wizard para consistencia si se quita el del wizard */
+
+    position: absolute; /* Todos los slides se superponen */
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    transform: translateX(100%); /* Por defecto, fuera de la vista a la derecha */
+    visibility: hidden;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateX(0); /* En el centro */
+    visibility: visible;
+    position: relative; /* O 'static', para que ocupe espacio y empuje la altura del wizard */
+}
+
+/* Clases para la animación de salida */
+.slide.exit-left {
+    transform: translateX(-100%); /* Sale hacia la izquierda */
+    opacity: 0;
+    /* position: absolute; ya lo es */
+}
+
+.slide.exit-right {
+    transform: translateX(100%); /* Sale hacia la derecha */
+    opacity: 0;
+    /* position: absolute; ya lo es */
+}
+
+/* (Opcional) Clases para la animación de entrada si quieres ser más explícito */
+ .slide.enter-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+.slide.enter-right {
+    transform: translateX(100%);
+    opacity: 0;
+} 
+

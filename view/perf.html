@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de Usuario</title>
+  <link rel="stylesheet" href="styles/perf.css">
+</head>
+<body>
+  <div class="header">
+    <label for="upload-cover">Cargar una portada 📤</label>
+    <input type="file" id="upload-cover" style="display: none;">
+  </div>
+
+  <div class="container">
+    <div class="profile-section">
+      <div class="avatar" onclick="document.getElementById('upload-avatar').click()">☁</div>
+      <input type="file" id="upload-avatar" style="display: none;">
+      <div class="profile-name" contenteditable="true">Nombre de Usuario</div>
+      <div class="edit-profile">Editar perfil</div>
+      <div class="profile-info">Informacion del perfil</div>
+    </div>
+
+    <div class="content-section">
+      <div class="tabs">
+        <div class="tab active" onclick="showTab('proyectos')">Proyectos</div>
+        <div class="tab" onclick="showTab('guardados')">Guardados</div>
+        <div class="tab" onclick="showTab('borradores')">Borradores</div>
+      </div>
+
+      <div class="projects" id="proyectos">
+        <div class="project-card">
+          <div class="circle-button">+</div>
+          <div>Iniciar un proyecto</div>
+        </div>
+      </div>
+
+      <div class="projects" id="guardados" style="display: none;">
+        <div class="project-card">Proyecto guardado</div>
+      </div>
+
+      <div class="projects" id="borradores" style="display: none;">
+        <div class="project-card">Proyecto borrador</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="help-button" onclick="alert('Ayuda en línea')">?</div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.projects').forEach(p => p.style.display = 'none');
+      document.querySelector(`#${tabId}`).style.display = 'flex';
+      document.querySelector(`.tab[onclick*="${tabId}"]`).classList.add('active');
+    }
+  </script>
+</body>
+</html>

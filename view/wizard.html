@@ -1,0 +1,83 @@
+<!-- wizard.html -->
+<!DOCTYPE html> 
+<html lang="es">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente de Prompt</title>
+    <link rel="stylesheet" href="styles/form-style.css"> <!-- Un CSS dedicado para esta página -->
+</head>
+<body>
+    <div class="form-wizard-container">
+        <div class="form-wizard">
+            <!-- Slide 1 -->
+            <div class="slide active" data-slide-index="0">
+                <h2>Paso 1: ¿Dónde se aplicará la textura?</h2>
+                <p>Ej: "en una pared de cocina moderna", "para un cojín de sofá", "como fondo de pantalla de un móvil"</p>
+                <textarea id="q1" placeholder="Escribe aquí (máx. 10 palabras)..." maxlength="60"></textarea>
+                <div class="slide-navigation">
+                    <button class="next-btn">Siguiente →</button>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide" data-slide-index="1">
+                <h2>Paso 2: ¿Cuál es el estilo principal?</h2>
+                <p>Ej: "minimalista", "art déco", "rústico", "futurista", "infantil"</p>
+                <textarea id="q2" placeholder="Describe el estilo (máx. 10 palabras)..." maxlength="60"></textarea>
+                <div class="slide-navigation">
+                    <button class="prev-btn">← Anterior</button>
+                    <button class="next-btn">Siguiente →</button>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide" data-slide-index="2">
+                <h2>Paso 3: ¿Qué colores predominan?</h2>
+                <p>Ej: "tonos azules y verdes", "paleta de colores tierra cálidos", "blanco y negro con toques dorados"</p>
+                <textarea id="q3" placeholder="Menciona los colores (máx. 10 palabras)..." maxlength="60"></textarea>
+                <div class="slide-navigation">
+                    <button class="prev-btn">← Anterior</button>
+                    <button class="next-btn">Siguiente →</button>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide" data-slide-index="3">
+                <h2>Paso 4: ¿Qué elementos o motivos incluir?</h2>
+                <p>Ej: "líneas geométricas finas", "siluetas de animales", "flores abstractas", "sin elementos definidos, solo textura"</p>
+                <textarea id="q4" placeholder="Describe los elementos (máx. 10 palabras)..." maxlength="60"></textarea>
+                <div class="slide-navigation">
+                    <button class="prev-btn">← Anterior</button>
+                    <button class="next-btn">Siguiente →</button>
+                </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="slide" data-slide-index="4">
+                <h2>Paso 5: ¿Algún detalle adicional ?</h2>
+                <p>Ej: "con un toque elegante", "que transmita calma", "energético y vibrante", "sutil y discreto"</p>
+                <textarea id="q5" placeholder="Añade detalles (máx. 10 palabras)..." maxlength="60"></textarea>
+                <div class="slide-navigation">
+                    <button class="prev-btn">← Anterior</button>
+                    <button class="finish-btn">Construir Prompt ✓</button>
+                </div>
+            </div>
+
+            <!-- Slide de Resumen (Opcional, pero recomendado) -->
+            <div class="slide" data-slide-index="5">
+                <h2>¡Prompt Listo!</h2>
+                <p>Este es el prompt que hemos construido con tus respuestas:</p>
+                <textarea id="summary-prompt" readonly rows="5"></textarea>
+                <p>Puedes copiarlo o usarlo directamente en el generador.</p>
+                <div class="slide-navigation">
+                    <button class="prev-btn">← Editar</button>
+                    <button id="use-prompt-btn">Usar este Prompt en el Generador</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../model/form-script.js"></script> <!-- Un JS dedicado para esta página -->
+</body>
+</html>

@@ -1,0 +1,150 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    background: #f9f9f9;
+  }
+  
+  .header {
+    background: #dedede;
+    height: 120px;
+    text-align: center;
+    padding-top: 40px;
+    font-size: 14px;
+    color: #666;
+    border-bottom: 4px solid #00b4d8;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    margin-top: -60px;
+    padding: 20px;
+  }
+  
+  .profile-section {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .avatar {
+    background-color: #0f97a3;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 10px;
+    border: 5px solid white;
+    cursor: pointer;
+  }
+  
+  .profile-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .edit-profile {
+    color: #0f97a3;
+    font-size: 12px;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  
+  .profile-info {
+    border: 1px solid #ccc;
+    background: white;
+    padding: 10px;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 13px;
+    text-align: center;
+  }
+  
+  .content-section {
+    flex: 1;
+    padding-left: 40px;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .tab {
+    cursor: pointer;
+    padding-bottom: 5px;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .tab.active {
+    font-weight: bold;
+    border-color: #000;
+  }
+  
+  .projects {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .project-card {
+    width: 180px;
+    height: 180px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .project-card:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .circle-button {
+    width: 40px;
+    height: 40px;
+    background: #50c7c7;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 10px;
+  }
+  
+  .help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: #0d1a26;
+    color: white;
+    font-size: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+  }
+  
